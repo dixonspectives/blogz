@@ -2,32 +2,32 @@
 
 {% block content %}
 
-    <h1 style='text-align:center'>Build-a-Blog</h1>
+    <h1 style='text-align:center;'>Build-a-Blog</h1>
 
-    {% if length|post == 0 %}
+    {% if total_posts != True %}
+         <br>
+         <br>
          <p>No Blog Posts Yet</p>
 
     {% else %}
-        <ul>
-        {% for title in titles %}
+        <ul style='list-style-type: none;'>
+        {% for t in blog_titles %}
             <li>
-                {{title}}
+                {{t.title}}
             </li>
-        {% end for%}
-        {% for date in dates %}
-        <li>
-            {{date}}
-        </li>
         {% endfor %}
-        {% for post in posts %}
+        {% for d in dates %}
             <li>
-                {{post}}
+                {{d.date}}
+            </li>
+        {% endfor %}
+        {% for p in posts %}
+            <li>
+                {{p.blog_post}}
             </li>
         {% endfor %}
         </ul>
         
     {% endif %}
         
-
-
 {% endblock %}

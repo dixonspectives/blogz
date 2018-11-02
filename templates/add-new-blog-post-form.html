@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1 style='text-align:center'>Add a New Blog Post</h2>
+    
+    <div style='margin-top: 100px; margin-left: 80px'><form method='POST'>
+        <p><label for='title-of-post'>Title of Blog Post:</label></p>
+        <p><input type="text" name="title-of-post" value='{{title_input}}'/></p>
+        <p class="error">{{title_input_error}}</p>
+        <br>
+        <br>
+        <p><label for='blog-post-body'>Blog Post Text:</label></p>
+        <p><textarea style='width:400px; height:200px' name='blog-post-body'>{% if post_input==post_input_error or post_input=='Enter text here...' %}Enter text here...{% else %}{{post_input}}{% endif %}</textarea></p>
+        <p class="error">{{post_input_error}}</p>
+        <p><input type='submit' value='Post'/></p>
+    </form>
+    </div>
+
+{% endblock %}
