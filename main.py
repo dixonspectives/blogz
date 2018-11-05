@@ -12,18 +12,13 @@ db = SQLAlchemy(app)
 class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
-    #date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     blog_post = db.Column(db.Text, nullable=False)
 
-def __init__(self, title, blog_post):
-    self.title = title
-    self.blog_post = blog_post
-    #self.date = date
-
-# This checks if the blog post column is empty
-def is_empty():
-    is_empty = db.session.query(Blog).filter_by(blog_post=None).all()
-    return is_empty
+    def __init__(self, title, blog_post):
+        self.title = title
+        self.blog_post = blog_post
+        #self.date = date
 # Since I am supposed to start at /blog, I redirect here to make it easier to navigate to where I am supposed to be   
 @app.route('/')
 def redirect_to_main():
@@ -60,15 +55,22 @@ def add_post():
 
     return render_template('add-new-blog-post-form.html')
 
+@app.route('/blog-post')
+def blog_post():
+    blog_posts = db.session.query(Blog.id, Blog.title, Blog.date, Blog.blog_post).all()
 
-@app.route('/blog', methods=['POST', 'GET'])
-def index():
-    blog_titles = db.session.query(Blog.title)
-    dates = db.session.query(Blog.date)
-    posts = db.session.query(Blog.blog_post)
-    total_posts = is_empty()
+    for post in 
     
-    return render_template('blog-listing-form.html', title='Build a Blog', total_posts=total_posts, posts=posts, blog_titles=blog_titles, dates=dates)
+    return render_template('blog-post-form.html')
+
+@app.route('/blog')
+def index():
+    blog_posts = db.session.query(Blog.title, Blog.date, Blog.blog_post).all()
+    #blog_titles = db.session.query(Blog.title)
+    #dates = db.session.query(Blog.date)
+    #posts = db.session.query(Blog.blog_post)
+    
+    return render_template('blog-listing-form.html', title='Build a Blog', blog_posts=blog_posts)
 
 if __name__ =='__main__':
     app.run()

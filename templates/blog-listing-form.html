@@ -4,30 +4,30 @@
 
     <h1 style='text-align:center;'>Build-a-Blog</h1>
 
-    {% if total_posts != True %}
-         <br>
-         <br>
-         <p>No Blog Posts Yet</p>
-
-    {% else %}
+    {% if blog_posts|length > 0 %}
+        <br>
+        <br>
         <ul style='list-style-type: none;'>
-        {% for t in blog_titles %}
+        {% for post in blog_posts %}
             <li>
-                {{t.title}}
+                <h2>{{post.title}}</h2>
             </li>
-        {% endfor %}
-        {% for d in dates %}
             <li>
-                {{d.date}}
+                <i>{{post.date}}</i>
             </li>
-        {% endfor %}
-        {% for p in posts %}
+            <br>
             <li>
-                {{p.blog_post}}
+                {{post.blog_post}}
             </li>
+            <br>
+            <hr>
         {% endfor %}
         </ul>
-        
+       
+    {% else %}
+        <br>
+        <br>
+        <p>No Blog Posts Yet</p>
     {% endif %}
         
 {% endblock %}
