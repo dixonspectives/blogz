@@ -48,29 +48,32 @@ def add_post():
             new_post = Blog(title_input, post_input)
             db.session.add(new_post)
             db.session.commit()
-            return redirect('/blog')
+            return redirect('/blog?id={0}'.format(new_post.id))
 
         else:
             return render_template('add-new-blog-post-form.html', title_input=title_input, title_input_error=title_input_error, post_input=post_input, post_input_error=post_input_error,)
 
     return render_template('add-new-blog-post-form.html')
 
-@app.route('/blog-post')
-def blog_post():
+def blog_posts():
     blog_posts = db.session.query(Blog.id, Blog.title, Blog.date, Blog.blog_post).all()
-
-    for post in 
-    
-    return render_template('blog-post-form.html')
+    return blog_posts
 
 @app.route('/blog')
 def index():
-    blog_posts = db.session.query(Blog.title, Blog.date, Blog.blog_post).all()
-    #blog_titles = db.session.query(Blog.title)
-    #dates = db.session.query(Blog.date)
-    #posts = db.session.query(Blog.blog_post)
+    blog_post_id = request.args.get('id')
     
-    return render_template('blog-listing-form.html', title='Build a Blog', blog_posts=blog_posts)
+    if blog_post_id != None:
+        return render_template('blog-post-form.html', blog_posts=blog_posts(), blog_post_id=blog_post_id)
+
+    return render_template('blog-listing-form.html', title='Build a Blog', blog_posts=blog_posts())
+
+@app.route('/blog-post')
+def blog_post():
+
+    blog_post_id = request.args.get('blog_post_id')
+
+    return render_template('blog-post-form.html', blog_post_id=blog_post_id)
 
 if __name__ =='__main__':
     app.run()

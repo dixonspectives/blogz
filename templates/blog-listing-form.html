@@ -2,32 +2,34 @@
 
 {% block content %}
 
-    <h1 style='text-align:center;'>Build-a-Blog</h1>
+<h1 style='text-align:center;'>Build-a-Blog</h1>
 
-    {% if blog_posts|length > 0 %}
-        <br>
-        <br>
-        <ul style='list-style-type: none;'>
-        {% for post in blog_posts %}
-            <li>
-                <h2>{{post.title}}</h2>
+{% if blog_posts|length > 0 %}
+    <br>
+    <br>
+    <ul style='list-style-type: none;'>
+    {% for post in blog_posts %}
+        <li>
+            <form>
+                <a type='submit' href='/blog?id={{post.id}}'>
+                <h2>{{post.title}}</h2></a>
+                <input type="hidden" name="post-id" value="post.id">
             </li>
-            <li>
-                <i>{{post.date}}</i>
-            </li>
-            <br>
-            <li>
-                {{post.blog_post}}
-            </li>
-            <br>
-            <hr>
-        {% endfor %}
-        </ul>
-       
-    {% else %}
+        <li>
+            <i>{{post.date}}</i>
+        </li>
         <br>
-        <br>
-        <p>No Blog Posts Yet</p>
-    {% endif %}
-        
+        <!--<li>
+            {{post.blog_post}}
+        </li>-->
+        <hr>
+    {% endfor %}
+    </ul>
+    
+{% else %}
+    <br>
+    <br>
+    <p>No Blog Posts Yet</p>
+{% endif %}
+    
 {% endblock %}

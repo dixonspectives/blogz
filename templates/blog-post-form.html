@@ -1,6 +1,26 @@
 {% extends 'base.html' %}
 
-<h1 style='text-align:center;'>Build-a-Blog</h1>
+{% block content %}
+
+<br>
+<br>
+{% for post in blog_posts %}
+    {% if blog_post_id == post.id %}
+<ul style='list-style-type: none;'>
+    <li>
+        <h2>{{post.title}}</h2></a>
+    </li>
+    <li>
+        <i>{{post.date}}</i>
+    </li>
+    <br>
+    <li>
+        {{post.blog_post}}
+    </li>
+    <hr>
+</ul>
+    {% endif%}
+{% endfor %}
 
 
 {% endblock %}
