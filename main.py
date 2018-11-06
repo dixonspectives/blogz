@@ -62,18 +62,12 @@ def blog_posts():
 @app.route('/blog')
 def index():
     blog_post_id = request.args.get('id')
+    blog = Blog.query.filter_by(id=blog_post_id).first()
     
     if blog_post_id != None:
-        return render_template('blog-post-form.html', blog_posts=blog_posts(), blog_post_id=blog_post_id)
+        return render_template('blog-post-form.html', blog=blog)
 
     return render_template('blog-listing-form.html', title='Build a Blog', blog_posts=blog_posts())
-
-@app.route('/blog-post')
-def blog_post():
-
-    blog_post_id = request.args.get('blog_post_id')
-
-    return render_template('blog-post-form.html', blog_post_id=blog_post_id)
 
 if __name__ =='__main__':
     app.run()
